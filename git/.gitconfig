@@ -1,0 +1,12 @@
+[user]
+	name = Dean Attias
+	email = dean.attias@gmail.com
+
+[alias]
+    st = status
+    co = checkout
+    br = branch
+    cm = commit
+    lg = log --oneline --graph --decorate --all
+[init]
+	defaultBranch = main
