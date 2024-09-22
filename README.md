@@ -1,70 +1,137 @@
+### `README.md`
+
+```markdown
 # Dean's Dotfiles
 
-These are my personal configuration files (dotfiles) to set up my development environment across different machines. The setup uses [GNU Stow](https://www.gnu.org/software/stow/) for symlink management to keep everything modular and easy to update.
+This repository contains my personal configuration files (dotfiles) for tools like Zsh, Tmux, Kitty, Neovim, and more. These dotfiles are organized to be symlinked to their correct locations using `stow` for easier management and version control.
 
-## Table of Contents
+## Structure
 
-- [Overview](#overview)
-- [Installation](#installation)
-- [Directory Structure](#directory-structure)
-- [Dependencies](#dependencies)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+The repository is structured as follows:
 
-## Overview
+```bash
+~/.dotfiles/
+├── .git/                # Git repository metadata
+├── .gitignore           # Files to ignore in Git (e.g., .DS_Store)
+├── .stow-local-ignore   # Ignore certain files in stow operations
+├── btop/                # Btop configuration files
+├── git/                 # Global Git configuration
+├── kitty/               # Kitty terminal configuration
+├── lazygit/             # Lazygit configuration
+├── nvim/                # Neovim configuration
+├── oh-my-zsh/           # Oh My Zsh framework and custom themes
+├── shell/               # Zsh configuration (e.g., .zshrc, .zprofile)
+├── tmux/                # Tmux configuration
+└── README.md            # This README file
+```
 
-This repository contains configuration files for various development tools and applications I use on a day-to-day basis. The configuration is modularized by application, allowing for easier maintenance and portability.
+## Setup Instructions
 
-## Installation
+### 1. Clone the Repository
 
-1. **Clone the repository**:
+First, clone the repository into your home directory:
 
-    ```bash
-    git clone https://github.com/your-username/dotfiles.git ~/.dotfiles
-    cd ~/.dotfiles
-    ```
+```bash
+git clone https://github.com/yourusername/dotfiles.git ~/.dotfiles
+```
 
-2. **Install GNU Stow**:
+### 2. Install `stow`
 
-    If you don’t have GNU Stow installed, you can install it using a package manager:
+This repository uses `stow` to manage symlinks. Install it using Homebrew:
 
-    - **macOS**: 
-      ```bash
-      brew install stow
-      ```
-    - **Linux** (Debian/Ubuntu):
-      ```bash
-      sudo apt install stow
-      ```
+```bash
+brew install stow
+```
 
-3. **Run Stow**:
+### 3. Symlink Dotfiles Using `stow`
 
-    Use `stow` to create symlinks for the configuration files you want to use. For example, to set up your shell, git, and tmux configurations:
+Once `stow` is installed, navigate to the `.dotfiles` directory and use `stow` to symlink the dotfiles to the appropriate locations in your system:
 
-    ```bash
-    stow shell
-    stow git
-    stow .config/tmux
-    ```
+```bash
+cd ~/.dotfiles
 
-    This will automatically create symlinks from your `~/.dotfiles` directory to the appropriate locations in your home directory.
+# Symlink each component:
+stow --target=$HOME btop
+stow --target=$HOME git
+stow --target=$HOME kitty
+stow --target=$HOME lazygit
+stow --target=$HOME nvim
+stow --target=$HOME oh-my-zsh
+stow --target=$HOME shell
+stow --target=$HOME tmux
+```
 
-## Directory Structure
+### 4. Reload Zsh Configuration
 
-The repository is structured to keep configurations for different tools in their respective directories. Here's an overview of the structure:
+After creating the symlinks, reload Zsh to apply the changes:
 
-```plaintext
-.dotfiles/
-├── .config/
-│   ├── tmux/
-│   │   └── tmux.conf         # Tmux configuration
-│   └── other-app/            # Additional application configs (e.g., Neovim, Kitty)
-├── git/
-│   └── gitconfig             # Git configuration
-├── shell/
-│   ├── bash_profile          # Bash profile for shell initialization
-│   ├── zshrc                 # Zsh configuration
-│   └── zprofile              # Zsh profile for shell initialization
-├── .gitignore                # Git ignore file for the dotfiles repo
-└── README.md                 # Documentation for setting up the environment
+```bash
+source ~/.zshrc
+```
+
+### 5. Configure Tmux Plugins
+
+If you are using Tmux, run the following command inside a Tmux session to install all Tmux plugins using TPM (Tmux Plugin Manager):
+
+```bash
+# Press `Ctrl + Space` and then `I` to install the Tmux plugins.
+```
+
+### 6. macOS Setup
+
+For macOS users, this repository includes a `setup_mac.sh` script to automate setting up your macOS environment, installing essential tools and configuring system settings.
+
+To run the macOS setup script:
+
+```bash
+~/.dotfiles/setup_mac.sh
+```
+
+This script will:
+- Install Homebrew and essential development tools like Git, Tmux, Neovim, Node.js, and Yarn.
+- Configure macOS preferences such as keyboard repeat rate, tap-to-click, and showing hidden files in Finder.
+
+### Key Configurations
+
+#### Zsh (Oh My Zsh)
+
+- Located in: `~/.dotfiles/shell/.zshrc`
+- Custom theme: **headline** (located in `~/.oh-my-zsh/custom/themes`)
+- Includes aliases and environment variables for managing development tools (like NVM, PNPM, Bun)
+
+#### Tmux
+
+- Located in: `~/.dotfiles/tmux/tmux.conf`
+- Uses several plugins managed via TPM, including `tmux-resurrect`, `tmux-sessionx`, and more
+- Keybindings for resizing panes, Vim-aware navigation, and toggling the status bar
+
+#### Kitty
+
+- Located in: `~/.dotfiles/kitty/kitty.conf`
+- Configures the **Tokyo Night** theme for Kitty and includes custom keybindings for natural text navigation
+- Enables mouse support and clipboard integration
+
+#### Neovim
+
+- Located in: `~/.dotfiles/nvim/init.lua`
+- Configures Neovim for a modern development environment with custom plugins
+
+#### Git
+
+- Located in: `~/.dotfiles/git/.gitconfig`
+- Includes global Git configuration for user details and default branch setup
+
+### Updating Dotfiles
+
+To update your dotfiles after making changes, commit and push them to GitHub:
+
+```bash
+git add .
+git commit -m "Update dotfiles"
+git push origin main
+```
+
+## License
+
+This repository is for personal use. Feel free to fork it or use it as inspiration for your own dotfiles, but there is no warranty or official support.
+```
