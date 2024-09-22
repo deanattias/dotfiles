@@ -78,3 +78,5 @@ if [ -d "$PNPM_HOME" ]; then
 else
   echo "Warning: PNPM not found. Please install PNPM."
 fi
+
+# End of .zshrc

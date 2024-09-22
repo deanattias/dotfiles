@@ -1,5 +1,3 @@
-### `README.md`
-
 ```markdown
 # Dean's Dotfiles
 
@@ -22,6 +20,7 @@ The repository is structured as follows:
 ├── oh-my-zsh/           # Oh My Zsh framework and custom themes
 ├── shell/               # Zsh configuration (e.g., .zshrc, .zprofile)
 ├── tmux/                # Tmux configuration
+├── vscode/              # VSCode configuration
 └── README.md            # This README file
 ```
 
@@ -59,6 +58,7 @@ stow --target=$HOME nvim
 stow --target=$HOME oh-my-zsh
 stow --target=$HOME shell
 stow --target=$HOME tmux
+stow --target=$HOME vscode
 ```
 
 ### 4. Reload Zsh Configuration
@@ -134,4 +134,3 @@ git push origin main
 ## License
 
 This repository is for personal use. Feel free to fork it or use it as inspiration for your own dotfiles, but there is no warranty or official support.
-```
